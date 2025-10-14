@@ -9,6 +9,8 @@ dependencies = [
     "category-encoders>=2.8.1",
     "folium>=0.20.0",
     "geopandas>=1.1.1",
+    "imbalanced-learn>=0.14.0",
+    "joblib>=1.5.2",
     "jupyter>=1.1.1",
     "matplotlib>=3.10.6",
     "missingno>=0.5.2",
@@ -19,4 +21,5 @@ dependencies = [
     "seaborn>=0.13.2",
     "sqlalchemy>=2.0.43",
     "statsmodels>=0.14.5",
+    "threadpoolctl>=3.6.0",
 ]
