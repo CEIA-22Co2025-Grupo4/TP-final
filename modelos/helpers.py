@@ -8,10 +8,11 @@ Este módulo contiene utilidades para:
 """
 
 import numpy as np
+import pandas as pd
 import torch
 import json
 import os
-import unicodedata
+from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, matthews_corrcoef, confusion_matrix, ConfusionMatrixDisplay
 
 from sklearn.metrics import accuracy_score
 
@@ -70,6 +71,64 @@ def load_all_metrics(metrics_dir="./metricas"):
 
     return all_metrics
 
+def muestra_metricas(model_name, y_test, y_predic, start_time=None, end_train_time=None, end_predict_time=None):
+    """
+    Función simple para personalizar las métrica a imprimir para cada modelo analizado.
+    model_name: string con el nombre del modelo
+    y_test: recibe el vector de salida real
+    y_predic: recibe el vector de salida predicho por el modelo
+    """
+
+    accuracy = accuracy_score(y_test, y_predic)
+    recall = recall_score(y_test, y_predic, average='weighted') # average permite definir cómo se computan estas métricas para múltiples clases de salida
+    precision = precision_score(y_test, y_predic, average='weighted')
+    f1s = f1_score(y_test, y_predic, average='weighted')
+    MCC = matthews_corrcoef(y_test, y_predic)
+
+    print("#######################################")
+    print("Accuracy (Exactitud): "+ "{:.2%}".format(accuracy))
+    print("Recall (Recuperación): "+ "{:.2%}".format(recall))
+    print("Precision (Precisión): "+ "{:.2%}".format(precision))
+    print("F1-Score: "+ "{:.2%}".format(f1s))
+    print("MCC (Matthews Correlation Coefficient): "+ "{:.2%}".format(MCC))    # Matthews correlation coefficient: https://scikit-learn.org/stable/modules/generated/sklearn.metrics.matthews_corrcoef.html
+
+    if (start_time != None and end_train_time != None and end_predict_time != None):
+        print("Tiempo de entrenamiento: {:.4f} s".format(end_train_time-start_time))
+        print("Tiempo de predicción: {:.4f} s".format(end_predict_time-end_train_time))
+        print("Tiempo total: {:.4f} s".format(end_predict_time-start_time))
+
+    print("#######################################")
+    model_performance = pd.DataFrame(columns=['Accuracy','Recall','Precision','F1-Score','MCC score','Entrenamiento (s)','Predicción (s)','Tiempo Total (s)'])
+    model_performance.loc[model_name] = [accuracy, recall, precision, f1s, MCC, end_train_time-start_time, end_predict_time-end_train_time, end_predict_time-start_time]
+
+
+def plot_confusion_matrix(y_true, y_preds, labels=None, model_name=None):
+    """
+    Función para graficar la Matrix de confusión
+    y_true: vector de salida real
+    y_predic: vector de salida predicho por el modelo
+    labels: opcional, para nombrar las clases. Lista con strings
+    model_name: opcional, para poner un título al gráfico
+    """
+    cm = confusion_matrix(y_true, y_preds)
+    cmd = ConfusionMatrixDisplay(cm, display_labels=labels)
+    cmd.plot()
+    cmd.ax_.set(xlabel='Clase Predicha', ylabel='Clase Real')
+    if model_name:
+        cmd.ax_.set(title=model_name)
+
+    # Midamos la sensibilidad y especificidad
+    if model_name:
+        print("Clasificador: {}".format(model_name))
+    P = np.sum(cm[1, :])
+    N = np.sum(cm[0, :])
+    TP = cm[1, 1]
+    TN = cm[0, 0]
+    TPR = TP/P
+    TNR = TN/N
+    print("Sensibilidad: {:.4f}".format(TP/P))
+    print("Especificidad: {:.4f}".format(TN/N))
+    print("Exactitud balanceada: {:.4f}".format((TPR + TNR)/2))
 
 # =============================================================================
 # DEEP LEARNING - ENTRENAMIENTO
