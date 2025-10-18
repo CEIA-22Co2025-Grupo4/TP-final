@@ -33,7 +33,10 @@ Para evaluar nuestros modelos de clasificación utilizamos un conjunto de métri
 
 
 ## Análisis de resultados
-![alt text](imagenes/image.png)
+![Tabla de comparacion de metricas](imagenes/tabla_comparativa.png)
+
+
+![Top de metricas por modelo](imagenes/top_metricas.png)
 
 El modelo seleccionado para este proyecto es XGBoost.
 
@@ -44,3 +47,11 @@ XGBoost obtuvo el MCC más alto con un 57.96%. Esto indica que, después de habe
 Más allá de su rendimiento predictivo, XGBoost también cumple sobradamente con el requisito de eficiencia. Su tiempo de predicción de 0.005 segundos es uno de los más rápidos, asegurando su viabilidad en un contexto de uso real.
 
 Aunque AdaBoost iguala su velocidad, su rendimiento predictivo es notablemente inferior (49.99% de MCC). Random Forest, si bien es competente, tiene un tiempo de predicción ocho veces más lento. Por lo tanto, XGBoost representa la combinación óptima de poder de aprendizaje y eficiencia computacional para este problema.
+
+Las redes neuronales, si bien no fueron optimizadas para entrenamiento en GPU o TPU, no resultan adecuadas para este caso de estudio, dado que el volumen de datos es limitado y la cantidad de variables (features) relativamente baja. En este contexto, los métodos de ensamble —como XGBoost, Random Forest y AdaBoost— demuestran un mejor desempeño tanto en métricas de precisión (MCC, F1, AUC) como en eficiencia computacional, evidenciando que son más apropiados para problemas tabulares con conjuntos de datos moderados.
+
+En comparación con los métodos lineales, como la regresión logística o el SVM lineal, se observa un desempeño considerablemente inferior en todas las métricas evaluadas (Accuracy, F1-Score, AUC y MCC). Esto sugiere que el problema bajo estudio presenta relaciones no lineales entre las variables, las cuales estos modelos no logran capturar adecuadamente.
+
+El algoritmo K-Nearest Neighbors (KNN), aunque no lineal, logra resultados intermedios, lo que refuerza la hipótesis de que la estructura del conjunto de datos no se ajusta a una frontera lineal. No obstante, su bajo MCC (17%) indica limitaciones en la capacidad de generalización y en el manejo del desbalance de clases.
+
+En síntesis, los métodos de ensamble basados en árboles resultan claramente superiores tanto frente a los modelos lineales como a las redes neuronales, combinando un buen equilibrio entre complejidad, interpretabilidad y rendimiento computacional.
