@@ -15,7 +15,7 @@
 Este proyecto constituye el trabajo final de la asignatura **Aprendizaje Máquina**, y tiene como propósito aplicar de forma integral los conceptos y metodologías abordados durante el curso.  
 El objetivo principal es desarrollar un **modelo de clasificación supervisado** capaz de predecir si un crimen reportado en la ciudad de **Chicago durante el año 2024** culminó o no en un **arresto**, utilizando técnicas modernas de análisis y aprendizaje automático.
 
-El proyecto sigue el **ciclo completo de un proyecto de ciencia de datos**, abarcando desde la selección y comprensión del dataset, el preprocesamiento y análisis exploratorio, hasta la construcción, evaluación y comparación de modelos predictivos.
+El proyecto sigue el **ciclo completo de un proyecto de ciencia de datos**, abarcando desde la selección y comprensión del *dataset*, el preprocesamiento y análisis exploratorio, hasta la construcción, evaluación y comparación de modelos predictivos.
 
 ---
 
@@ -47,17 +47,25 @@ El repositorio se organiza en tres directorios principales, reflejando las etapa
 
 ### [`preprocesamiento/`](./preprocesamiento)
 Contiene los notebooks que desarrollan todo el proceso de preparación y análisis de datos:
-1. **Creación del dataset:** integración de fuentes, limpieza y estructura base.  
+1. **Creación del *dataset*:** integración de fuentes, limpieza y estructura base.  
 2. **EDA:** exploración descriptiva y detección de patrones y anomalías.  
-3. **Tratamiento de outliers y codificación:** aplicación de transformaciones logarítmicas y codificación de variables categóricas.  
+3. **Tratamiento de *outliers* y codificación:** aplicación de transformaciones logarítmicas y codificación de variables categóricas.  
 4. **Escalado:** comparación de diferentes métodos y selección de *StandardScaler*.  
-5. **Balanceo:** combinación de *SMOTE* (oversampling) y undersampling aleatorio.  
+5. **Balanceo:** combinación de SMOTE (*oversampling*) y *undersampling* aleatorio.  
 6. **Selección y extracción de características:** análisis de correlaciones, ANOVA, información mutua y PCA.
 
 ### [`modelos/`](./modelos)
 Incluye los notebooks correspondientes a la fase de modelización, donde se implementan y evalúan distintos **modelos de aprendizaje supervisado**, tales como:
 
-**COMPLETAR**
+* Regresión Logística
+* K Vecinos Más Cercanos (*K-Nearest Neighboors* - KNN)
+* Máquina de Vectores de Soporte (*Support Vector Machine* - SVM)
+* Árbol de Decisión
+* *Random Forest*
+* *Ada Boost*
+* *eXtreme Gradient Boosting* (XGB)
+* *Bagging Classifier*
+* Red Neuronal Simple
 
 ### [`datasets/`](./datasets)
 Directorio que contiene los datasets utilizados en las distintas etapas.
