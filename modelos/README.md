@@ -30,3 +30,17 @@ Para evaluar nuestros modelos de clasificación utilizamos un conjunto de métri
 6. *AUC (Área Bajo la Curva ROC)* 
     * Mide la capacidad del modelo para discriminar entre la clase positiva (1) y la negativa (0). Representa la probabilidad de que el modelo le asigne una puntuación (probabilidad) más alta al caso positivo que al negativo.
     * Su principal ventaja es que es independiente del umbral de decisión.
+
+
+## Análisis de resultados
+![alt text](imagenes/image.png)
+
+El modelo seleccionado para este proyecto es XGBoost.
+
+Esta decisión se fundamenta en su clara superioridad en las dos métricas más críticas para este problema de clasificación: el Coeficiente de Correlación de Matthews (MCC) y el Área Bajo la Curva (AUC).
+
+XGBoost obtuvo el MCC más alto con un 57.96%. Esto indica que, después de haber entrenado con el set de datos ya balanceado, XGBoost demostró ser el modelo más capaz de aprender los patrones subyacentes y correlacionar sus predicciones con la realidad de forma equilibrada. Asimismo, su AUC de 88.64% demuestra la mayor capacidad del conjunto para discriminar correctamente entre los casos que resultarán en un arresto y los que no.
+
+Más allá de su rendimiento predictivo, XGBoost también cumple sobradamente con el requisito de eficiencia. Su tiempo de predicción de 0.005 segundos es uno de los más rápidos, asegurando su viabilidad en un contexto de uso real.
+
+Aunque AdaBoost iguala su velocidad, su rendimiento predictivo es notablemente inferior (49.99% de MCC). Random Forest, si bien es competente, tiene un tiempo de predicción ocho veces más lento. Por lo tanto, XGBoost representa la combinación óptima de poder de aprendizaje y eficiencia computacional para este problema.
